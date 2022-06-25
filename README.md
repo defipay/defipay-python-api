@@ -217,3 +217,21 @@ client.query_rate("ETH","USDT")
 </details>
 
 
+### 交易通知API驗簽認證
+#### 驗簽認證
+
+```python
+def verify_response(self, response: requests.Response) -> (bool, dict):
+        content = response.content.decode()
+        success = True
+        try:
+            timestamp = response.headers["BIZ_TIMESTAMP"]
+            signature = response.headers["BIZ_RESP_SIGNATURE"]
+            if self.debug:
+                print(f"response <<<<<<<< \n content: {content}\n headers: {response.headers} \n")
+            success = verify_ecdsa_signature("%s|%s" % (content, timestamp), signature, self.env.coboPub)
+        except KeyError:
+            pass
+        return success, json.loads(content)
+```
+
