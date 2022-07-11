@@ -230,7 +230,7 @@ def verify_response(self, response: requests.Response) -> (bool, dict):
             signature = response.headers["BIZ_RESP_SIGNATURE"]
             if self.debug:
                 print(f"response <<<<<<<< \n content: {content}\n headers: {response.headers} \n")
-            success = verify_ecdsa_signature("%s|%s" % (content, timestamp), signature, self.env.coboPub)
+            success = verify_ecdsa_signature("%s|%s" % (content, timestamp), signature, self.env.defipayPub)
         except KeyError:
             pass
         return success, json.loads(content)
