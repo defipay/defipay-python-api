@@ -1,7 +1,7 @@
 from setuptools import setup
 setup(
     name="defipay",
-    version="2.3.1",
+    version="2.3.8",
     author="Defipay",
     author_email="support@defipay.biz",
     description="Defipay restful api",
